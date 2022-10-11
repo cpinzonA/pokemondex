@@ -6,6 +6,7 @@ body {
 .container{
 display: flex;
 flex-direction: column;
+flex-wrap: wrap;
 }
   
   h1 {
@@ -14,7 +15,7 @@ flex-direction: column;
   
   .pokemon-container {
     display: grid;
-    grid-template-columns: 2fr 2fr 4fr;
+    grid-template-columns: 2fr 2fr 2fr;
     gap: 30px;
     width: auto;
     height: auto;
@@ -31,11 +32,13 @@ flex-direction: column;
     box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
   }
   .img-container {
+    flex-direction: row;
     background-image: url("./blob.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 30px;
   }
+  
   .pokemon-block p {
     margin: 5px;
   }

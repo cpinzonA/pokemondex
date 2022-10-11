@@ -1,7 +1,7 @@
 const pokemonContainer = document.querySelector(".pokemon-container");
 const spinner = document.querySelector("#spinner");
 
-let id=document.querySelector(".buscar")
+let id=document.querySelector(".btn")
 id.addEventListener("click",Pokemon);
 
 
@@ -35,11 +35,15 @@ function createPokemon(Pokemon) {
 
   const spriteContainer = document.createElement("div");
   spriteContainer.classList.add("img-container");
-
   const sprite = document.createElement("img");
   sprite.src = Pokemon.sprites.front_default;
+  const spriteContainer1 = document.createElement("div");
+  spriteContainer1.classList.add("img-container");
+  const sprite1 = document.createElement("img");
+  sprite1.src = Pokemon.sprites.front_shiny;
 
   spriteContainer.appendChild(sprite);
+  spriteContainer1.appendChild(sprite1);
 
   const number = document.createElement("p");
   number.innerHTML = `#${Pokemon.id}`;
@@ -56,6 +60,7 @@ function createPokemon(Pokemon) {
  
  
   card.appendChild(spriteContainer);
+  card.appendChild(spriteContainer1);
   card.appendChild(number);
   card.appendChild(name);
   card.appendChild(abilities);
