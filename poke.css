@@ -10,7 +10,9 @@ flex-wrap: wrap;
 }
   
   h1 {
-    color: white;
+    text-align: center;
+    color: azure;
+    margin-top: 5%;
   }
   
   .pokemon-container {
@@ -28,7 +30,7 @@ flex-wrap: wrap;
   .pokemon-block-back {
     border-radius: 10px;
     padding: 70px;
-    background-color: white;
+    background-color: rgba(31, 205, 138, 0.364);
     box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
   }
   .img-container {
