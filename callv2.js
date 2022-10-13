@@ -3,24 +3,33 @@ const spinner = document.querySelector("#spinner");
 
 let id=document.querySelector(".btn")
 id.addEventListener("click",Pokemon);
-
-
     
-          function Pokemon(){
+         function Pokemon(){
               return fetchPokemon()
-              function fetchPokemon(){
+             async function fetchPokemon(){
                 let poke_name=document.querySelector(".poke-name").value
-                fetch(`https://pokeapi.co/api/v2/pokemon/${poke_name}/`)
-                  .then((res) => res.json())
-                 .then(data=>{
-                    createPokemon(data)
+               const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${poke_name}/`)
+                if (res.status==404){
+                   pokemonContainer.textContent="no encontrado"
+                   let crea=document.querySelector(".btn")
+                   crea.addEventListener("click",crear); 
+                   function crear(){ 
+                     pokemonContainer.innerHTML="";
+                   }
+                  
+                  
+                   
+                } else{const json = await res.json()
+                 
+                    createPokemon(json)
                     spinner.style.display = "none";
-                 }
-                    
-                  ) 
+                }            
+             
+                
+                   
       } 
-    } 
-
+     
+      
 function createPokemon(Pokemon) {
   const flipCard = document.createElement("div");
   flipCard.classList.add("flip-card");
@@ -53,18 +62,18 @@ function createPokemon(Pokemon) {
   name.textContent = Pokemon.name;
   const abilities = document.createElement("p");
   abilities.classList.add("abilities");
-  abilities.textContent = Pokemon.abilities[0].ability.name
-  const abilities1 = document.createElement("p");
-  abilities1.classList.add("abilities");
-  abilities1.textContent = Pokemon.abilities[1].ability.name
- 
+
+ for(let i=0;i< Pokemon.abilities.length;i++){
+  abilities.innerHTML+=`<p>${Pokemon.abilities[i].ability.name}</p> ` 
+  }
+  
  
   card.appendChild(spriteContainer);
   card.appendChild(spriteContainer1);
   card.appendChild(number);
   card.appendChild(name);
   card.appendChild(abilities);
-  card.appendChild(abilities1);
+
 
 
   const cardBack = document.createElement("div");
@@ -81,7 +90,7 @@ function progressBars(stats) {
   const statsContainer = document.createElement("div");
   statsContainer.classList.add("stats-container");
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const stat = stats[i];
 
     const statPercent = stat.base_stat / 2 + "%";
@@ -112,11 +121,9 @@ function progressBars(stats) {
 
   return statsContainer;
 }
-
-function removeChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
+         }
+let cancelar=document.querySelector(".cancel")
+cancelar.addEventListener("click",cancel);
+function cancel(){ 
+  pokemonContainer.innerHTML="";
 }
-
-
